@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+		<!-- Google Chrome Frame也可以让IE用上Chrome的引擎: -->
+		<meta name="renderer" content="webkit">
+		<!--国产浏览器高速模式-->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="穷在闹市" />
+		<!-- 作者 -->
+		<meta name="revised" content="穷在闹市.v3, 2019/05/01" />
+		<!-- 定义页面的最新版本 -->
+		<meta name="description" content="网站简介" />
+		<!-- 网站简介 -->
+		<meta name="keywords" content="搜索关键字，以半角英文逗号隔开" />
+		<title>穷在闹市出品</title>
+
+		<!-- 公共样式 开始 -->
+		<link rel="stylesheet" type="text/css" href="../../css/base.css">
+		<link rel="stylesheet" type="text/css" href="../../css/iconfont.css">
+		<script type="text/javascript" src="../../framework/jquery-1.11.3.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="../../layui/css/layui.css">
+		<script type="text/javascript" src="../../layui/layui.js"></script>
+		<!-- 滚动条插件 -->
+		<link rel="stylesheet" type="text/css" href="../../css/jquery.mCustomScrollbar.css">
+		<script src="../../framework/jquery-ui-1.10.4.min.js"></script>
+		<script src="../../framework/jquery.mousewheel.min.js"></script>
+		<script src="../../framework/jquery.mCustomScrollbar.min.js"></script>
+		<script src="../../framework/cframe.js"></script><!-- 仅供所有子页面使用 -->
+		<!-- 公共样式 结束 -->
+
+		<!--<style>
+			.ifShow{
+				display: none;
+			}
+		</style>-->
+
+		<script src="../../js/globalData.js"></script>
+
+
+
+	</head>
+
+	<body>
+		<div class="cBody">
+			<form id="addForm" class="layui-form" action="">
+
+				<div class="layui-form-item">
+					<label class="layui-form-label">类名</label>
+					<div class="layui-input-inline shortInput">
+						<input type="text" name="categoryName" required lay-verify="required" placeholder="类名" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item layui-form-text">
+					<label class="layui-form-label">描述</label>
+					<div class="layui-input-block">
+						<textarea name="description" placeholder="请输入内容" class="layui-textarea"></textarea>
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">类级</label>
+					<div class="layui-input-block">
+						<div id="radio">
+							<input type="radio" name="class" value="0" title="一级分类" checked>
+							<input type="radio" name="class" value="1" title="二级分类">
+						</div>
+
+					</div>
+				</div>
+				<div class="layui-form-item ifShow">
+					<label class="layui-form-label">一级类名</label>
+					<div class="layui-input-inline shortInput">
+						<input type="text" name="firstCategoryName" placeholder="一级类名" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+
+				<div class="layui-form-item">
+					<div class="layui-input-block">
+						<button class="layui-btn" lay-submit lay-filter="submitBut">立即提交</button>
+					</div>
+				</div>
+			</form>
+
+			<script>
+				layui.use('form',function () {
+					var form = layui.form;
+					form.on('submit(submitBut)',function (data) {
+						console.log("data",data);
+						let parentName = data.field.firstCategoryName
+						if (data.field.class==0){
+							parentName=null
+						}
+						$.ajax({
+							url:'http://'+ip+':8080/mall/manager/addCategory',
+							type: 'post',
+							contentType: 'application/json',
+							data:JSON.stringify({
+								name:data.field.categoryName,
+								description:data.field.description,
+								parentName:parentName
+							}),
+							success: function (data) {
+								if (data.code=="200"){
+									alert("增添成功");
+									$("#addForm")[0].reset();
+								}else {
+									console.log("增添失败");
+								}
+							},
+							error: function(){
+								console.log('出错啦!!');
+							},
+							headers:{token:'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlIjoxNjA2MTE4MTg5LCJ1c2VybmFtZSI6Im1hc3Rlcm1hIn0.z3aIPt3uoaiBJLyUDB_CuyxIMX7JiRvq2Xk61qqCOyY'}
+						})
+						return false
+					})
+				})
+			</script>
+
+
+
+		</div>
+	</body>
+
+	<script>
+		/*$(() => {
+			$("#radio :radio").on('click', function () {
+				var item= $(this).val();
+				console.log(item);
+				if (item=='1'){
+					$('.ifShow').show();
+				}
+			})
+			$('input[name="sex"]').click(function () {
+				console.log("000000000000000");
+			})
+		});*/
+	</script>
+
+</html>

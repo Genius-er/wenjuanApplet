@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+		<!-- Google Chrome Frame也可以让IE用上Chrome的引擎: -->
+		<meta name="renderer" content="webkit">
+		<!--国产浏览器高速模式-->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="穷在闹市" />
+		<!-- 作者 -->
+		<meta name="revised" content="穷在闹市.v3, 2019/05/01" />
+		<!-- 定义页面的最新版本 -->
+		<meta name="description" content="网站简介" />
+		<!-- 网站简介 -->
+		<meta name="keywords" content="搜索关键字，以半角英文逗号隔开" />
+		<title>视力问卷系统</title>
+
+		<!-- 公共样式 开始 -->
+		<link rel="stylesheet" type="text/css" href="../../css/base.css">
+		<link rel="stylesheet" type="text/css" href="../../css/iconfont.css">
+		<script type="text/javascript" src="../../framework/jquery-1.11.3.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="../../layui/css/layui.css">
+		<script type="text/javascript" src="../../layui/layui.js"></script>
+		<!-- 滚动条插件 -->
+		<link rel="stylesheet" type="text/css" href="../../css/jquery.mCustomScrollbar.css">
+		<script src="../../framework/jquery-ui-1.10.4.min.js"></script>
+		<script src="../../framework/jquery.mousewheel.min.js"></script>
+		<script src="../../framework/jquery.mCustomScrollbar.min.js"></script>
+		<script src="../../framework/cframe.js"></script><!-- 仅供所有子页面使用 -->
+		<!-- 公共样式 结束 -->
+
+
+		<script src="../../js/globalData.js"></script>
+
+
+		<style>
+			.layui-unselect
+			,.layui-form-select{
+				height: 28px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="cBody">
+
+<!--			搜索模块-->
+			<div class="console">
+				<form class="layui-form" action="">
+					<div class="layui-form-item">
+						<div class="layui-input-inline">
+							<input type="text" name="search_username" required lay-verify="required" placeholder="输入用户名" autocomplete="off" class="layui-input">
+						</div>
+						<button class="layui-btn" lay-submit lay-filter="search_username">搜索</button>
+					</div>
+				</form>
+			</div>
+
+			<!--todo: 表格占位-->
+			<table id="user_table" class="layui-table"></table>
+
+			<!--todo: user列表渲染-->
+			<script type="text/html" id="status1" lay-filter="status1">
+				<select name="status" id="status" lay-filter="status">
+					{{#  if(d.status ===0){ }}
+					<option value="1">启用</option>
+					<option value="0" selected>禁用</option>
+					{{#  } else{ }}
+					<option value="1" selected>启用</option>
+					<option value="0">禁用</option>
+					{{#  } }}
+				</select>
+			</script>
+
+			<!--todo: 渲染表格-->
+			<script>
+				layui.use(['table','form'],function () {
+					let table = layui.table;
+
+						//用户列表渲染
+					table.render({
+							elem: '#user_table'
+							,id:"reload"
+							,height: 550
+							,url: 'http://'+ip+':8080/wenjuan/manager/showAllUsers' //数据接口
+							,headers:{
+								token:window.localStorage.getItem("token")
+							}
+							,contentType:'application/json'
+							,response: {
+								statusCode: 200 //规定成功的状态码，默认：0
+							}
+							,page: false
+						// true //开启分页
+							,method: 'post'
+
+							/*
+							* field:数据接口返回数据中data列表中每一项中对应得名字
+							* */
+							,cols: [[ //表头
+								{field: 'id', title: 'ID', sort: true, fixed: 'left'}
+								,{field: 'nickName', title: '昵称'}
+								,{field: 'gender', title: '性别'}
+								,{field: 'city', title: '城市'}
+								,{field: 'province', title: '省份'}
+								,{field: 'country', title: '国家'}
+								,{field: 'avatarUrl', title: '头像地址'}
+								,{field: 'openId', title: 'openId'}
+								/*,{field: 'state', title: '登录态'}*/
+								/*,{field: 'phone', title: '联系方式', sort: true}*/
+								,{field: 'createTime', title: '创建时间'}
+								,{field: 'status', title: '状态',templet: '#status1',align:'center'}
+
+							]],
+							done: function (res, curr, count) {
+								console.log(res.code);
+								//数据渲染完的回调。
+								//由于layui 设置了超出隐藏，所以这里改变下，以兼容操作按钮的下拉菜单
+								// $(".layui-table-cell").css('overflow', 'visible');
+								$(".laytable-cell-1-0-9").css('overflow', 'visible');
+							}
+						});
+
+					/*todo: 搜索监听*/
+					let form = layui.form;
+					//监听提交
+					form.on('submit(search_username)', function(data) {
+						// layer.msg(JSON.stringify(data.field));
+						let nickName = data.field.search_username;
+
+						/*todo: 处理搜索的ajax请求*/
+						table.reload('reload',{
+							height: 500
+							,where:{
+								nickName: nickName
+							}
+							,url: 'http://'+ip+':8080/wenjuan/manager/searchUser' //数据接口
+							,headers:{
+								token:window.localStorage.getItem("token")
+							}
+							// ,request: JSON.stringify({"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlIjoxNjA2MTE4MTg5LCJ1c2VybmFtZSI6Im1hc3Rlcm1hIn0.z3aIPt3uoaiBJLyUDB_CuyxIMX7JiRvq2Xk61qqCOyY"})
+							,contentType:'application/json'
+							,response: {
+								statusCode: 200 //规定成功的状态码，默认：0
+							}
+							,page: {
+								limit:10
+							}
+							// true //开启分页
+							,method: 'post'
+							,cols: [[ //表头
+								{field: 'id', title: 'ID', sort: true, fixed: 'left'}
+								,{field: 'nickName', title: '昵称'}
+								,{field: 'gender', title: '性别'}
+								,{field: 'city', title: '城市'}
+								,{field: 'province', title: '省份'}
+								,{field: 'country', title: '国家'}
+								,{field: 'avatarUrl', title: '头像地址'}
+								,{field: 'openId', title: 'openId'}
+								/*,{field: 'state', title: '登录态'}*/
+								/*,{field: 'phone', title: '联系方式', sort: true}*/
+								,{field: 'createTime', title: '创建时间'}
+								,{field: 'status', title: '状态',templet: '#status1',align:'center'}
+							]],
+							done: function (res, curr, count) {
+								console.log(res.code);
+								//数据渲染完的回调。
+								//由于layui 设置了超出隐藏，所以这里改变下，以兼容操作按钮的下拉菜单
+								$(".laytable-cell-1-0-9").css('overflow', 'visible');
+							}
+
+						});
+
+
+						return false;
+					});
+				})
+
+				/*todo: 监听启用禁用的下拉框*/
+				layui.use('form', function () {
+
+					var form = layui.form;
+					//监听下拉框编辑
+					form.on('select(status)', function (data) {
+
+						//获取当前行tr对象
+						let elem = data.othis.parents('tr');
+						//第一列的值是Guid，取guid来判断
+						let userId= elem.first().find('td').eq(0).text();
+						//选择的select对象值；
+						let selectValue = data.value;
+						console.log("新值",selectValue);
+
+						/*todo: 修改状态的ajax请求*/
+						$.ajax({
+							//url（对应servlet的路径）
+							url: 'http://'+ip+':8080/wenjuan/manager/setUserStatus',
+
+							contentType: 'application/json',
+							//参数
+							data: JSON.stringify({
+								userId:userId,
+								status:selectValue}),
+							//请求类型
+							type: 'POST',
+							//响应体结果
+							// dataType: 'json',
+							//成功的回调
+							success: function(data){
+								//这里可以对响应体进行处理
+								console.log(data);
+								if (data.code==="200") {
+									console.log("修改成功");
+								}else {
+									console.log("修改失败");
+								}
+							},
+							//超时时间
+							timeout: 2000,
+							//失败的回调
+							error: function(){
+								console.log('出错啦!!');
+							},
+							//头信息
+							headers: {
+								token:window.localStorage.getItem("token")
+              }
+						})
+
+					})
+				});
+
+
+			</script>
+			<script>
+
+			</script>
+
+			<!-- layUI 分页模块 -->
+<!--			<div id="pages"></div>
+			<script>
+				layui.use(['laypage', 'layer'], function() {
+					var laypage = layui.laypage,
+						layer = layui.layer;
+
+					//总页数大于页码总数
+					laypage.render({
+					    elem: 'pages'
+					    ,count: 100
+					    ,layout: ['count', 'prev', 'page', 'next', 'limit', 'skip']
+					    ,jump: function(obj){
+					      console.log(obj)
+					    }
+					});
+				});
+			</script>-->
+		</div>
+	</body>
+
+</html>

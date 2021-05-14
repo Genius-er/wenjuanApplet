@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0680706a-8399-4803-8d4c-08fb1dc700fc" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="ProjectId" id="1kXoiqPbbsjcG19ZsNZkBfM6Szc" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="javascript.nodejs.core.library.configured.version" value="14.14.0" />
+    <property name="javascript.nodejs.core.library.typings.version" value="14.14.0" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/pages/feedback" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="Settings.JavaScript" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\大学四年\大四\毕业设计\6.开发\后台管理系统(前端)\pages\feedback" />
+      <recent name="D:\大学四年\大四\毕业设计\6.开发\后台管理系统(前端)\pages\article" />
+      <recent name="D:\大学四年\大四\毕业设计\6.开发\后台管理系统(前端)\js" />
+      <recent name="D:\大学四年\大四\毕业设计\6.开发\后台管理系统(前端)\pages\wenjuan" />
+      <recent name="D:\大学四年\大四\毕业设计\6.开发\后台管理系统(前端)\images" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="wenjuan_add.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/pages/wenjuan/js/wenjuan_add.js" working-dir="$PROJECT_DIR$/pages/wenjuan/js">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Node.js.wenjuan_add.js" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0680706a-8399-4803-8d4c-08fb1dc700fc" name="Default Changelist" comment="" />
+      <created>1605856426962</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1605856426962</updated>
+      <workItem from="1605856428049" duration="228000" />
+      <workItem from="1605856703297" duration="1324000" />
+      <workItem from="1606094636877" duration="29081000" />
+      <workItem from="1606129657929" duration="6844000" />
+      <workItem from="1606180937164" duration="1062000" />
+      <workItem from="1606182478383" duration="23626000" />
+      <workItem from="1606225750380" duration="5231000" />
+      <workItem from="1606267230069" duration="17082000" />
+      <workItem from="1606376760129" duration="8628000" />
+      <workItem from="1606439868595" duration="4240000" />
+      <workItem from="1613977662066" duration="33138000" />
+      <workItem from="1614334938188" duration="14493000" />
+      <workItem from="1614421370321" duration="36670000" />
+      <workItem from="1614750013735" duration="17298000" />
+      <workItem from="1615015013151" duration="7874000" />
+      <workItem from="1615270785240" duration="4872000" />
+      <workItem from="1615529845155" duration="1987000" />
+      <workItem from="1615615935827" duration="601000" />
+      <workItem from="1616035103533" duration="3891000" />
+      <workItem from="1616206434611" duration="3213000" />
+      <workItem from="1616295201726" duration="595000" />
+      <workItem from="1616814360295" duration="2487000" />
+      <workItem from="1616919726569" duration="4843000" />
+      <workItem from="1617431085752" duration="12606000" />
+      <workItem from="1617701055761" duration="626000" />
+      <workItem from="1619105496700" duration="615000" />
+      <workItem from="1619165422844" duration="3560000" />
+      <workItem from="1619234674214" duration="612000" />
+      <workItem from="1619242423040" duration="1017000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

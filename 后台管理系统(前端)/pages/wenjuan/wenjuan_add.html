@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+		<!-- Google Chrome Frame也可以让IE用上Chrome的引擎: -->
+		<meta name="renderer" content="webkit">
+		<!--国产浏览器高速模式-->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="穷在闹市" />
+		<!-- 作者 -->
+		<meta name="revised" content="穷在闹市.v3, 2019/05/01" />
+		<!-- 定义页面的最新版本 -->
+		<meta name="description" content="网站简介" />
+		<!-- 网站简介 -->
+		<meta name="keywords" content="搜索关键字，以半角英文逗号隔开" />
+		<title>穷在闹市出品</title>
+
+		<!-- 公共样式 开始 -->
+		<link rel="stylesheet" type="text/css" href="../../css/base.css">
+		<link rel="stylesheet" type="text/css" href="../../css/iconfont.css">
+		<script type="text/javascript" src="../../framework/jquery-1.11.3.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="../../layui/css/layui.css">
+		<script type="text/javascript" src="../../layui/layui.js"></script>
+		<!-- 滚动条插件 -->
+		<link rel="stylesheet" type="text/css" href="../../css/jquery.mCustomScrollbar.css">
+		<script src="../../framework/jquery-ui-1.10.4.min.js"></script>
+		<script src="../../framework/jquery.mousewheel.min.js"></script>
+		<script src="../../framework/jquery.mCustomScrollbar.min.js"></script>
+		<script src="../../framework/cframe.js"></script><!-- 仅供所有子页面使用 -->
+		<!-- 公共样式 结束 -->
+
+
+		<script src="../../js/globalData.js"></script>
+
+
+		<!--引入该页样式和js-->
+		<link rel="stylesheet" href="./css/wenjuan_add.css">
+		<script type="text/javascript" src="js/wenjuan_add.js"></script>
+
+
+
+	</head>
+
+	<body>
+		<div id="wenjuanContainer">
+
+			<div id="wenjuan_title">
+
+			</div>
+
+			<!--已经添加的题目-->
+			<div id="question_list">
+				<!--单选-->
+				<div class="question">
+					<div class="question_danxuan">
+						<div class="question_title">
+							<span class="isNecessary">*</span><span>1</span>、<span>您从合适开始近视?</span>
+						</div>
+						<div class="question_candidate">
+							<div class="candidate">
+								<div class="circle"></div>
+								<span class="candidate_content">小学之前</span>
+							</div>
+							<div class="candidate">
+								<span class="circle"></span>
+								<span class="candidate_content">小学</span>
+							</div>
+							<div class="candidate">
+								<span class="circle"></span>
+								<span class="candidate_content">初中</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!--多选-->
+				<div class="question">
+					<div class="question_duoxuan">
+						<div class="question_title">
+							<span class="isNecessary">*</span><span>2</span>、<span>您从合适开始近视?</span><span class="duoxuan_tishi">[多选题]</span>
+						</div>
+						<div class="question_candidate">
+							<div class="candidate">
+								<div class="circle"></div>
+								<span class="candidate_content">小学之前</span>
+							</div>
+							<div class="candidate">
+								<span class="circle"></span>
+								<span class="candidate_content">小学</span>
+							</div>
+							<div class="candidate">
+								<span class="circle"></span>
+								<span class="candidate_content">初中</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!--填空-->
+				<div class="question">
+					<div class="question_tiankong">
+						<div class="question_title">
+							<span class="isNecessary">*</span><span>3</span>、<span>您从合适开始近视?</span>
+						</div>
+						<div class="tiankongArea">
+							<input>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<!--添加题目的编辑区-->
+			<div id="wenjuan_add">
+
+				<!--单选-->
+				<div id="danxuan_add">
+					<form id="addForm_danxuan" class="layui-form" action="">
+
+						<div class="layui-form-item layui-form-text">
+							<label class="layui-form-label">问题：</label>
+							<div class="layui-input-block">
+								<textarea type="text" id="danxuan_add_title" name="title" placeholder="请题目内容" class="layui-textarea" required lay-verify="required"></textarea>
+							</div>
+						</div>
+
+						<div id="danxaunCandidateContainer">
+
+							<div class="layui-form-item">
+								<label class="layui-form-label">1</label>
+								<div class="layui-input-inline shortInput">
+									<input class="danxuanCandidate" type="text" name="categoryName" lay-verify="required" autocomplete="off" class="layui-input">
+								</div>
+							</div>
+
+							<div class="layui-form-item">
+								<label class="layui-form-label">2</label>
+								<div class="layui-input-inline shortInput">
+									<input class="danxuanCandidate" type="text" name="categoryName" lay-verify="required" autocomplete="off" class="layui-input">
+								</div>
+							</div>
+
+						</div>
+						<div class="layui-form-item">
+							<div class="layui-input-block">
+								<button class="layui-btn" id="addDanxuanCandidate">增加选项</button>
+							</div>
+						</div>
+
+
+
+						<div class="layui-form-item">
+							<div class="layui-input-block">
+								<div>
+									<input type="radio" name="isNecessary" value="0" title="必须" checked>
+									<input type="radio" name="isNecessary" value="1" title="非必须">
+								</div>
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<div class="layui-input-block">
+								<button id="addDanxuanCandidateFinish" class="layui-btn" lay-submit lay-filter="submitBut">确定</button>
+								<button id="addDanxuanCandidateCancel" class="layui-btn">取消</button>
+							</div>
+						</div>
+					</form>
+				</div>
+
+				<!--多选-->
+				<div id="duoxuan_add">
+					<form id="addForm_duoxuan" class="layui-form" action="">
+
+						<div class="layui-form-item layui-form-text">
+							<label class="layui-form-label">问题：</label>
+							<div class="layui-input-block">
+								<textarea id="duoxuan_add_title" name="description" lay-verify="required" placeholder="请题目内容" class="layui-textarea"></textarea>
+							</div>
+						</div>
+
+						<div id="duoxuanCandidateContainer">
+							<div class="layui-form-item">
+								<label class="layui-form-label">1</label>
+								<div class="layui-input-inline shortInput">
+									<input class="duoxuanCandidate" type="text" name="categoryName" lay-verify="required" autocomplete="off" class="layui-input">
+								</div>
+							</div>
+
+							<div class="layui-form-item">
+								<label class="layui-form-label">2</label>
+								<div class="layui-input-inline shortInput">
+									<input class="duoxuanCandidate" type="text" name="categoryName" lay-verify="required" autocomplete="off" class="layui-input">
+								</div>
+							</div>
+						</div><!---->
+
+						<div class="layui-form-item">
+							<div class="layui-input-block">
+								<button class="layui-btn" id="addDuoxuanCandidate">增加选项</button>
+							</div>
+						</div>
+
+						<div class="layui-form-item">
+							<div class="layui-input-block">
+								<div>
+									<input type="radio" name="isNecessary" value="0" title="必须" checked>
+									<input type="radio" name="isNecessary" value="1" title="非必须">
+								</div>
+							</div>
+						</div>
+
+						<div class="layui-form-item">
+							<div class="layui-input-block">
+								<button id="addDuoxuanCandidateFinish" class="layui-btn" lay-submit lay-filter="submitBut">确定</button>
+								<button id="addDuoxuanCandidateCancel" class="layui-btn">取消</button>
+							</div>
+						</div>
+					</form>
+				</div>
+
+				<!--填空-->
+				<div id="tiankong_add">
+					<form id="addForm_tiankong" class="layui-form" action="">
+
+						<div class="layui-form-item layui-form-text">
+							<label class="layui-form-label">问题：</label>
+							<div class="layui-input-block">
+								<textarea id="tiankong_add_title" name="description" lay-verify="required" placeholder="请题目内容" class="layui-textarea"></textarea>
+							</div>
+						</div>
+
+						<div class="layui-form-item">
+							<div class="layui-input-block">
+								<div>
+									<input type="radio" name="isNecessary" value="0" title="必须" checked>
+									<input type="radio" name="isNecessary" value="1" title="非必须">
+								</div>
+							</div>
+						</div>
+
+						<div class="layui-form-item">
+							<div class="layui-input-block">
+								<input type="button" id="addTiankongCandidateFinish" class="layui-btn" lay-submit lay-filter="submitBut" value="确定"/>
+								<input type="button" id="addTiankongCandidateCancel" class="layui-btn" value="取消"/>
+							</div>
+						</div>
+
+					</form>
+				</div>
+
+
+			</div>
+
+			<!--添加题目及类型选择-->
+			<div id="addOptions">
+				<span>添加题目:</span>
+				<button id="addDanxuanClick" class="layui-btn">单选题</button>
+				<button id="addDuoxuanClick" class="layui-btn">多选题</button>
+				<button id="addTiankongClick" class="layui-btn">填空题</button>
+			</div>
+
+			<!--问卷编辑完成或重置提交-->
+			<!--<div id="finishOptions">
+				<button id="addFinish" class="layui-btn layui-btn-normal">完成</button>
+				<button id="addReset" class="layui-btn layui-btn-danger">重置</button>
+			</div>-->
+
+			<div id="dinishOptions">
+				<form id="add_wenjuan_title" class="layui-form" action="">
+
+					<div class="layui-form-item layui-form-text">
+						<div class="layui-input-block">
+							<input id="inputQuestionList" type="hidden" name="img" required class="layui-input">
+						</div>
+					</div>
+
+					<div class="layui-form-item layui-form-text">
+						<label class="layui-form-label">问卷标题：</label>
+						<div class="layui-input-block">
+							<textarea id="wenjuan_add_title" name="title" lay-verify="required" placeholder="请题目内容" class="layui-textarea"></textarea>
+						</div>
+					</div>
+
+
+
+					<div class="layui-form-item">
+						<label class="layui-form-label">问卷图片：</label>
+						<div class="layui-upload-drag layui-input-block" id="wenjuanImg">
+							<input id="input_img" type="hidden" name="img" required class="layui-input">
+							<div class="hint">
+								<i class="layui-icon"></i>
+								<p>点击上传，或将文件拖拽到此处</p>
+							</div>
+							<div class="layui-hide" id="uploadDemoView">
+								<img src="" alt="上传成功后渲染" style="max-width: 196px">
+							</div>
+						</div>
+					</div>
+
+					<div class="layui-form-item">
+						<label class="layui-form-label">持续时间（天）：</label>
+						<div class="layui-input-block">
+							<input type="text" name="time" autocomplete="off" class="layui-input" lay-verify="required|number">
+						</div>
+					</div>
+
+
+
+					<div class="layui-form-item">
+						<div class="layui-input-block">
+							<button id="addFinish" class="layui-btn layui-btn-normal" lay-submit lay-filter="submitBut">完成</button>
+							<button id="addReset" class="layui-btn layui-btn-danger">重置</button>
+						</div>
+					</div>
+
+				</form>
+			</div>
+
+		</div>
+	</body>
+
+
+
+</html>

@@ -1,0 +1,13 @@
+/* pages/dataDetail/dataDetail.wxss */
+.questionList {
+  /*background: red;*/
+  height: calc(100vh - 120rpx);
+}
+
+/*视频列表样式*/
+.videoScroll {
+  margin-top: 10rpx;
+  /* calc: 可以动态计算css的宽高， 运算符左右两侧必须加空格，否则计算会失效 */
+  /* 视口单位： vh vw  1vh = 1%的视口高度  1vw = 1%的视口宽度*/
+
+}

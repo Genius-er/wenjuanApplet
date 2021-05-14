@@ -1,0 +1,26 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/articleDetail/articleDetail",
+    "pages/login/login",
+    "pages/wenjuanDetail/wenjuanDetail",
+    "components/wenjuan/wenjuan",
+    "pages/denglu/denglu",
+    "pages/wenjuanShowAnswer/wenjuanShowAnswer",
+    "pages/dataDetail/dataDetail",
+    "pages/showTiankongDataList/showTiankongDataList",
+    "pages/feedbackPage/feedbackPage",
+    "pages/aboutPage/aboutPage"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "ColorUI",
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "white"
+  },
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom"
+  },
+  "sitemapLocation": "sitemap.json"
+}

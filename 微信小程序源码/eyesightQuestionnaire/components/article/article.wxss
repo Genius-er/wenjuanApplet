@@ -1,0 +1,34 @@
+/* components/article/article.wxss *//* pages/article/article.wxss */
+
+.imageContainer{
+  position: relative;
+}
+.swiperTitle {
+  padding: 0 30rpx;
+  box-sizing: border-box;
+  width: 100%;
+  position: absolute;
+  bottom: 8%;
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
+  font-size: 32rpx;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+/*滚动文章列表*/
+.listScroll {
+  border-top: 1rpx solid #999;
+  margin-top: -10rpx;
+  height: calc(100vh - 420rpx);
+  margin-bottom: 100rpx;
+}
+
+.scrollItem {
+  margin-bottom: -25rpx;
+}
+
+

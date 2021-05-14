@@ -1,0 +1,20 @@
+<!--pages/showTiankongDataList/showTiankongDataList.wxml-->
+<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">填空题数据</view>
+</cu-custom>
+<view class="dataContainer margin solid-border-around">
+  <view class="flex  p-xs mb-sm bg-grey">
+    <view class="flex-sub padding-sm solid-border-around text-center">序号</view>
+    <view class="flex-twice padding-sm solid-border-around text-center">提交答案时间</view>
+    <view class="flex-treble padding-sm solid-border-around text-center">答案文本</view>
+  </view>
+
+  <!--循环遍历数据-->
+  <view class="flex p-xs mb-sm solid" wx:for="{{dataList}}" wx:key="id">
+    <view class="flex-sub padding-sm solid-border-around">{{index+1}}</view>
+    <view class="flex-twice padding-sm solid-border-around">{{item.createTime}}</view>
+    <view class="flex-treble padding-sm solid-border-around">{{item.content}}</view>
+  </view>
+
+</view>

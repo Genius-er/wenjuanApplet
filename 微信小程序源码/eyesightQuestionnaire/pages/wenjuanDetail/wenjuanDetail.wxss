@@ -1,0 +1,11 @@
+/* pages/wenjuanDetail/wenjuanDetail.wxss */
+/*单选*/
+@import "/templates/question/question.wxss";
+
+.wenjuanDetailContainer {
+  height: 100vh;
+}
+
+.questionList {
+  margin-top: 50rpx;
+}

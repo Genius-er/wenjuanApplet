@@ -1,0 +1,34 @@
+<!--公共页，其他也用成组件-->
+
+<article wx:if="{{PageCur=='article'}}"></article>
+<wenjuan wx:if="{{PageCur=='wenjuan'}}"></wenjuan>
+<data wx:if="{{PageCur=='data'}}"></data>
+<user wx:if="{{PageCur=='user'}}" userInfo="{{userInfo}}"></user>
+
+<!--导航条-->
+<view class="cu-bar tabbar bg-white shadow foot">
+  <view class="action" bindtap="NavChange" data-cur="article">
+    <view class='cuIcon-cu-image'>
+      <image src="/images/tabbar/article{{PageCur=='article'?'_cur':''}}.png"></image>
+    </view>
+    <view style="color:{{PageCur=='article'?'#9CACE4':'#999999'}}">文章</view>
+  </view>
+  <view class="action" bindtap="NavChange" data-cur="wenjuan">
+    <view class='cuIcon-cu-image'>
+      <image src="/images/tabbar/wenjuan{{PageCur=='wenjuan'?'_cur':''}}.png"></image>
+    </view>
+    <view style="color:{{PageCur=='wenjuan'?'#9CACE4':'#999999'}}">问卷</view>
+  </view>
+  <view class="action" bindtap="NavChange" data-cur="data">
+    <view class='cuIcon-cu-image'>
+      <image src="/images/tabbar/data{{PageCur=='data'?'_cur':''}}.png"></image>
+    </view>
+    <view style="color:{{PageCur=='search'?'#9CACE4':'#999999'}}">数据</view>
+  </view>
+  <view class="action" bindtap="NavChange" data-cur="user">
+    <view class='cuIcon-cu-image'>
+      <image src="/images/tabbar/user{{PageCur=='user'?'_cur':''}}.png"></image>
+    </view>
+    <view style="color:{{PageCur=='user'?'#9CACE4':'#999999'}}">我的</view>
+  </view>
+</view>

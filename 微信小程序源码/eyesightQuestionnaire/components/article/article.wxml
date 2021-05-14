@@ -1,0 +1,71 @@
+<cu-custom bgColor="bg-gradual-blue">
+  <view slot="content">文章</view>
+</cu-custom>
+
+<!--轮播图-->
+<swiper class="swiperCard card-swiper {{DotStyle?'square-dot':'round-dot'}}" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff">
+  <swiper-item
+      wx:for="{{hotArticleList}}"
+      wx:key="id"
+      class="{{cardCur==index?'cur':''}}"
+      data-url='/pages/articleDetail/articleDetail?id={{item.id}}'
+      data-index='{{index}}'
+      bindtap='nophonefull'
+      bindlongtap="copy"
+      bindtouchstart="touchStart"
+      bindtouchend="touchEnd">
+
+    <view class="swiper-item imageContainer">
+      <image src="{{host}}{{item.coverImg}}" mode="aspectFill"></image>
+      <text class="swiperTitle">{{item.title}}</text>
+    </view>
+  </swiper-item>
+</swiper>
+
+
+
+<scroll-view
+    class="listScroll"
+    scroll-y
+>
+  <view
+      class="scrollItem"
+      wx:for="{{notHotArticleList}}"
+      wx:key="id"
+      wx:for-item="aritcle"
+
+      data-url='/pages/articleDetail/articleDetail?id={{aritcle.id}}'
+      data-index='{{index}}'
+      bindtap='nophonefull'
+      bindlongtap="copy"
+      bindtouchstart="touchStart"
+      bindtouchend="touchEnd">
+    <!--文章卡片-->
+    <view class="articleCard cu-card article {{isCard?'no-card':''}}">
+      <view class="cu-item shadow">
+        <view class="title">
+          <view class="text-cut">{{aritcle.title}}</view>
+        </view>
+        <view class="content">
+          <image src="{{host}}{{aritcle.coverImg}}" mode="aspectFill"></image>
+          <view class="desc">
+            <view class="text-content"> {{aritcle.content}}</view>
+            <view>
+              <view class="cu-tag {{index%4===0?'bg-red':''}}{{index%4===1?'bg-orange':''}}{{index%4===2?'bg-green':''}}{{index%4===3?'bg-blue':''}} light sm round" wx:for="{{aritcle.keyword}}" wx:for-item="keyword">{{keyword}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+
+
+
+</scroll-view>
+
+<view class="text-center margin-top">
+  <text class="text-grey text-xl">{{motto}}</text>
+</view>
+

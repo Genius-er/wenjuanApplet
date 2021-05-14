@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+		<!-- Google Chrome Frame也可以让IE用上Chrome的引擎: -->
+		<meta name="renderer" content="webkit">
+		<!--国产浏览器高速模式-->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="穷在闹市" />
+		<!-- 作者 -->
+		<meta name="revised" content="穷在闹市.v3, 2019/05/01" />
+		<!-- 定义页面的最新版本 -->
+		<meta name="description" content="网站简介" />
+		<!-- 网站简介 -->
+		<meta name="keywords" content="搜索关键字，以半角英文逗号隔开" />
+		<title>穷在闹市出品</title>
+
+		<!-- 公共样式 开始 -->
+		<link rel="stylesheet" type="text/css" href="../../css/base.css">
+		<link rel="stylesheet" type="text/css" href="../../css/iconfont.css">
+		<script type="text/javascript" src="../../framework/jquery-1.11.3.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="../../layui/css/layui.css">
+		<script type="text/javascript" src="../../layui/layui.js"></script>
+		<!-- 滚动条插件 -->
+		<link rel="stylesheet" type="text/css" href="../../css/jquery.mCustomScrollbar.css">
+		<script src="../../framework/jquery-ui-1.10.4.min.js"></script>
+		<script src="../../framework/jquery.mousewheel.min.js"></script>
+		<script src="../../framework/jquery.mCustomScrollbar.min.js"></script>
+		<script src="../../framework/cframe.js"></script><!-- 仅供所有子页面使用 -->
+		<!-- 公共样式 结束 -->
+
+		<script src="../../js/globalData.js"></script>
+		<script>
+			/*let IframCount = new IframCount();
+			iframeCount = IframCount.__proto__.iframeCount;
+			iframeCount = 0;*/
+			window.localStorage.setItem('iframeCount',0)
+		</script>
+
+	</head>
+
+	<body>
+		<div class="cBody">
+
+<!--			搜索模块-->
+			<div class="console">
+				<form class="layui-form" action="">
+					<div class="layui-form-item">
+						<div class="layui-input-inline">
+							<input type="text" name="search_category" required lay-verify="required" placeholder="输入类名" autocomplete="off" class="layui-input">
+						</div>
+						<button class="layui-btn" lay-submit lay-filter="search_category">搜索</button>
+					</div>
+				</form>
+			</div>
+
+
+			<!--todo: 表格占位-->
+			<table id="category_table" class="layui-table" lay-filter="category_table"></table>
+
+			<!--todo: deleye_category列表templet-->
+			<!--<script type="text/html" id="options" lay-filter="options">
+				<div class="options" >
+					<input type="button" class="layui-btn layui-btn-normal layui-btn-xs modify" lay-filter="modify" value="修改">
+					<input type="button" class="layui-btn layui-btn-danger layui-btn-xs delete" lay-filter="delete" value="删除">
+					<input type="button" class="layui-btn layui-btn-xs showSecond" lay-filter="showSecond" value="查看二级分类">
+				</div>
+			</script>-->
+			<script type="text/html" id="options" lay-filter="options">
+				<a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="modify">修改</a>
+				<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+				<a class="layui-btn layui-btn-xs" lay-event="showSecond">查看二级分类</a>
+			</script>
+			<!--todo: 渲染表格-->
+			<script>
+				layui.use(['table','form'],function () {
+					let table = layui.table;
+
+					//第一个实例
+					table.render({
+						elem: '#category_table'
+						,id:"reload"
+						,height: 550
+						,url: 'http://'+ip+':8080/mall/manager/showAllCategories' //数据接口
+						,headers:{token:'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlIjoxNjA2MTE4MTg5LCJ1c2VybmFtZSI6Im1hc3Rlcm1hIn0.z3aIPt3uoaiBJLyUDB_CuyxIMX7JiRvq2Xk61qqCOyY'}
+						// ,request: JSON.stringify({"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlIjoxNjA2MTE4MTg5LCJ1c2VybmFtZSI6Im1hc3Rlcm1hIn0.z3aIPt3uoaiBJLyUDB_CuyxIMX7JiRvq2Xk61qqCOyY"})
+						,contentType:'application/json'
+						,response: {
+							statusCode: 200 //规定成功的状态码，默认：0
+						}
+						,page: {
+							limit:10
+						}
+						// true //开启分页
+						,method: 'post'
+						,cols: [[ //表头
+							{field: 'name', title: '类名'}
+							,{field: 'description', title: '描述'}
+							,{toolbar: '#options', title: '操作',align:'center'}
+
+						]],
+						done: function (res, curr, count) {
+							console.log(res.code);
+							//数据渲染完的回调。
+							//由于layui 设置了超出隐藏，所以这里改变下，以兼容操作按钮的下拉菜单
+							$("#options.layui-tbn").css({"height": "28px","line-height":"28px"}); }
+					});
+
+					/*todo:监听tool*/
+					table.on('tool(category_table)',function (obj) {
+						console.log("监听",obj.data);
+						switch (obj.event) {
+							case 'modify':
+								let iframeCount = window.localStorage.getItem('iframeCount');
+								window.localStorage.setItem('flag', "0");
+								iframeCount++;
+								window.localStorage.setItem('iframeCount',iframeCount)
+								console.log(obj);
+								//iframe层-父子操作
+								var updateFrame = null;
+								updateFrame = layer.open({
+								title: "分类信息修改",
+								type: 2,
+									end: function () {
+										location.reload();
+									},
+								area: ['70%', '60%'],
+								// scrollbar: false,	//默认：true,默认允许浏览器滚动，如果设定scrollbar: false，则屏蔽
+								// maxmin: true,
+									content: 'category_modify.html?name=' + obj.data.name + '&description=' + obj.data.description + '&parentId=' + obj.data.parentId + '&cateId=' + obj.data.cateId
+								});
+
+								break;
+							case 'delete':
+								let iframeCount1 = window.localStorage.getItem('iframeCount');
+								iframeCount1++
+								$.ajax({
+									url: 'http://'+ip+':8080/mall/manager/deleteCategory',
+									contentType:'application/json'
+									, data: JSON.stringify({cateId:obj.data.cateId})
+									,type: 'POST'
+									, success: function (data) {
+										window.localStorage.setItem('iframeCount',iframeCount1)
+										console.log(data.code);
+										if (data.code === "200") {
+											obj.del();
+											layer.msg("删除成功");
+										} else {
+											layer.msg("删除失败");
+										}
+									}
+									,headers:{
+										token:'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlIjoxNjA2MTE4MTg5LCJ1c2VybmFtZSI6Im1hc3Rlcm1hIn0.z3aIPt3uoaiBJLyUDB_CuyxIMX7JiRvq2Xk61qqCOyY'
+									}
+								})
+								break;//这是我的一个ajax删除方法了，记得删除后要有obj.del()哦，否则数据是不会更新的！
+							case 'showSecond':
+								let iframeCount2 = window.localStorage.getItem('iframeCount');
+								iframeCount2++
+								/*todo: 处理搜索的ajax请求*/
+								table.reload('reload',{
+									height: 550
+									, where: {
+										cateId: obj.data.cateId
+									}
+									,url: 'http://'+ip+':8080/mall/manager/showSecCategory' //数据接口
+									,headers:{
+										token:'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlIjoxNjA2MTE4MTg5LCJ1c2VybmFtZSI6Im1hc3Rlcm1hIn0.z3aIPt3uoaiBJLyUDB_CuyxIMX7JiRvq2Xk61qqCOyY'
+									}
+									// ,request: JSON.stringify({"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlIjoxNjA2MTE4MTg5LCJ1c2VybmFtZSI6Im1hc3Rlcm1hIn0.z3aIPt3uoaiBJLyUDB_CuyxIMX7JiRvq2Xk61qqCOyY"})
+									,contentType:'application/json'
+									,response: {
+										statusCode: 200 //规定成功的状态码，默认：0
+									}
+									,page: {
+										limit:10
+									}
+									// true //开启分页
+									,method: 'post'
+									,cols: [[ //表头
+										{field: 'name', title: '类名'}
+										,{field: 'description', title: '描述'}
+										,{toolbar: '#options', title: '操作',align:'center'}
+
+									]],
+									done: function (res, curr, count) {
+										console.log(res.code);
+										//数据渲染完的回调。
+										//由于layui 设置了超出隐藏，所以这里改变下，以兼容操作按钮的下拉菜单
+										$(".layui-table-cell").css('overflow', 'visible'); }
+								});
+								// layer.msg("功能暂未开放，你没有权限");
+								//嘿嘿，修改和删除差不多啦
+								break;
+						}
+					})
+
+					/*todo: 搜索监听*/
+					let form = layui.form;
+
+					form.on('submit(search_category)', function(data) {
+						// layer.msg(JSON.stringify(data.field));
+						let categoryName = data.field.search_category;
+
+						/*todo: 处理搜索的ajax请求*/
+						table.reload('reload',{
+							height: 550
+							,where:{
+								name: categoryName
+							}
+							,url: 'http://'+ip+':8080/mall/manager/searchCategory' //数据接口
+							,headers:{
+								token:'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlIjoxNjA2MTE4MTg5LCJ1c2VybmFtZSI6Im1hc3Rlcm1hIn0.z3aIPt3uoaiBJLyUDB_CuyxIMX7JiRvq2Xk61qqCOyY'
+							}
+							// ,request: JSON.stringify({"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlIjoxNjA2MTE4MTg5LCJ1c2VybmFtZSI6Im1hc3Rlcm1hIn0.z3aIPt3uoaiBJLyUDB_CuyxIMX7JiRvq2Xk61qqCOyY"})
+							,contentType:'application/json'
+							,response: {
+								statusCode: 200 //规定成功的状态码，默认：0
+							}
+							,page: {
+								limit:10
+							}
+							// true //开启分页
+							,method: 'post'
+							,cols: [[ //表头
+								{field: 'name', title: '类名'}
+								,{field: 'description', title: '描述'}
+								,{toolbar: '#options', title: '操作',align:'center'}
+
+							]],
+							done: function (res, curr, count) {
+								console.log(res.code);
+								//数据渲染完的回调。
+								//由于layui 设置了超出隐藏，所以这里改变下，以兼容操作按钮的下拉菜单
+								$(".layui-table-cell").css('overflow', 'visible'); }
+						});
+
+
+						return false;
+					});
+
+
+				})
+
+			</script>
+
+		</div>
+	</body>
+</html>

@@ -1,0 +1,10 @@
+/* pages/wenjuanShowAnswer/@import "/templates/question/question.wxss";*/
+@import "/templates/question/question.wxss";
+
+.wenjuanShowAnswerContainer {
+  height: 100vh;
+}
+
+.questionList {
+  margin-top: 50rpx;
+}

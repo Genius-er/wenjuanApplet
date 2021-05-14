@@ -1,0 +1,12 @@
+<!--components/question/tiankong/tiankong.wxml-->
+<view class="duoxuanContainer questionWidth">
+  <view class="questionContent">
+    <view class="questionTitle">
+      <span class="star">{{question.isNecessary?"*":""}}</span>{{num}}、{{question.content}}<span class="tips">（填空题）</span>
+    </view>
+    <view class="inputArea">
+      <input type="text" bindblur="inputBlur" data-type="2" name="{{item.questionId}}" value="{{question.value}}" disabled="{{isShow}}"></input>
+
+    </view>
+  </view>
+</view>

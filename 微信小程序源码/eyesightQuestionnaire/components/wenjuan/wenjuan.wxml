@@ -1,0 +1,14 @@
+<!--components/wenjuan/wenjuan.wxml-->
+<import src="/templates/wenjuanList/wenjuanList.wxml" />
+
+<cu-custom bgColor="bg-gradual-blue">
+  <view slot="content">问卷</view>
+</cu-custom>
+
+<scroll-view
+    class="scrollWenjuan"
+    scroll-y>
+  <view class="scrollItem" wx:for="{{wenjuanList}}" wx:key="id">
+    <template is="wenjuan_list" data="{{...item,host}}"/>
+  </view>
+</scroll-view>

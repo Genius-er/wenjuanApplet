@@ -1,0 +1,33 @@
+<!--单选题-->
+<template name="danxuan">
+  <view class="danxuanContainer questionWidth">
+    <view class="questionContent">
+      <!--    <view calss="questionTitle">{{title}}<span>（单选题）</span></view>-->
+      <view class="questionTitle">1、题目<span>（单选题）</span></view>
+
+      <view class="danxuanList">
+
+        <checkbox-group bindchange="checkboxChange" class="checkGroup">
+
+          <label wx:for="{{questions[0].items}}" wx:key="{{item.value}}">
+
+            <view class="danxuanLabel">
+              <checkbox value="{{item.value}}" checked="{{item.checked}}"/>
+              <view class="danxuanItem">{{item.name}}</view>
+            </view>
+
+
+          </label>
+
+        </checkbox-group>
+
+        <!--      <view class="xuanxiangItem">-->
+        <!--        <checkbox value="0">是</checkbox>-->
+        <!--      </view>-->
+      </view>
+    </view>
+
+
+  </view>
+
+</template>

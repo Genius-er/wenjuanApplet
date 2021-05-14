@@ -1,0 +1,88 @@
+/* pages/templates/votelist/votelist.wxss */
+.singlBox{
+  width: 90%;
+  margin: 0 5%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20rpx;
+  background-color: #fff;
+  margin-top: 20rpx;
+}
+.imageBox{
+  width: 100%;
+  height: 30vw;
+}
+.imageBox image{
+  width: 100%;
+  height: 30vw;
+  border-radius: 10rpx 10rpx 0 0;
+}
+
+.jobMesBox{
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  padding:15rpx 5%;
+  justify-content: space-between;
+}
+.name{
+  width: 370rpx;
+  height: 50%;
+  font-size: 35rpx;
+  color: #3b3b3b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow:ellipsis;
+}
+.weikaishi{
+  color: #9f10f1;
+}
+.weizuoda{
+  color: #38c100;
+}
+.zanting{
+  color: #f19410;
+}
+.yizuoda{
+  color: #f11020;
+}
+.schedule{
+  display: flex;
+  color: #a2a2a2;
+  font-size: 28rpx;
+  height: 40%;
+  align-items:center;
+  justify-content: space-between;
+}
+.time{
+  color: #a2a2a2;
+  font-size: 20rpx;
+  padding: 5rpx 0;
+}
+
+
+.monDateBox{
+  height: 130rpx;
+  width: 150rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-left: dashed #c4c4c4 2rpx;
+}
+.supNum{
+  display: block;
+  color: #1296db;
+  font-size: 37rpx;
+  width: 100%;
+  text-align: center;
+}
+.supNumTitle{
+  display: block;
+  color: #c4c4c4;
+  font-size: 28rpx;
+  width: 100%;
+  text-align: center;
+}

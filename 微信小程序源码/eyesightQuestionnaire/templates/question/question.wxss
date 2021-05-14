@@ -1,0 +1,35 @@
+.questionWidth {
+  background: #999;
+  border-radius: 20rpx;
+  margin: 20rpx 20rpx;
+}
+
+
+.questionContent {
+  margin: 0 20rpx;
+  padding: 20rpx 0;
+}
+
+.questionTitle{
+  margin-left: 10rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.questionTitle span {
+  font-weight: normal;
+  font-size: 28rpx;
+  color: #dd514c;
+}
+
+.danxuanLabel {
+  margin-top: 20rpx;
+}
+
+.danxuanItem {
+  display: inline;
+
+  margin-left: 20rpx;
+}
+
+

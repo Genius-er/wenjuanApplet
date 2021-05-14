@@ -1,0 +1,21 @@
+<!--components/data/data.wxml-->
+<import src="/templates/dataList/dataList.wxml" />
+
+<cu-custom bgColor="bg-gradual-blue">
+  <view slot="content">数据</view>
+</cu-custom>
+
+<scroll-view
+    class="scrollWenjuan"
+    scroll-y>
+  <view class="scrollItem" wx:for="{{wenjuanList}}" wx:key="id">
+    <template is="data_list" data="{{...item,host}}" wx:if="{{item.isAnswered===true}}"/>
+  </view>
+</scroll-view>
+
+
+<!--<view class="container">
+  &lt;!&ndash;<ec-canvas class="charts" canvas-id="charts1" ec="{{ ec }}"></ec-canvas>
+  <ec-canvas class="charts" canvas-id="charts2" ec="{{ ec }}"></ec-canvas>
+  <ec-canvas class="charts" canvas-id="charts2" ec="{{ ec }}"></ec-canvas>&ndash;&gt;
+</view>-->

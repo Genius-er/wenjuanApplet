@@ -1,0 +1,58 @@
+
+#wenjuanContainer {
+  border: 1px solid black;
+  height: 600px;
+  margin: 20px 50px;
+  overflow-y: scroll;
+}
+/*题目显示区*/
+.question {
+  padding: 10px;
+  border-bottom: 1px solid black;
+}
+
+.circle {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border: 1px solid black;
+  border-radius: 50%;
+}
+
+.isNecessary {
+  color: red;
+}
+
+.duoxuan_tishi{
+  font-size: 12px;
+  color: #888;
+}
+
+
+/*添加题目区*/
+#danxuan_add,
+#tiankong_add,
+#duoxuan_add{
+  padding: 10px;
+  margin: 10px 0px;
+  border: 1px solid black;
+}
+
+
+
+
+/*添加题目类型选项区*/
+#addOptions {
+  margin: 10px;
+}
+
+
+/*添加完成区域*/
+#dinishOptions {
+  border-top: 1px solid black;
+  margin-top: 20px;
+  padding-top: 20px;
+  text-align: center;
+}
+
+

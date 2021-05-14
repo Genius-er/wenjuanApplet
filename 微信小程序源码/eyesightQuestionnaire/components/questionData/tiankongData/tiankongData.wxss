@@ -1,0 +1,28 @@
+/* components/questionData/tiankongData/tiankongData.wxss */
+.questionWidth {
+  margin: 20rpx 20rpx;
+}
+
+
+.questionContent {
+  margin: 0 20rpx;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #999;
+}
+
+.questionTitle{
+  margin-left: 10rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.questionTitle .star {
+  color: red;
+}
+
+.questionTitle .tips {
+  font-weight: normal;
+  font-size: 28rpx;
+  color: #dd514c;
+}
+

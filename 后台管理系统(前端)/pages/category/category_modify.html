@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+		<!-- Google Chrome Frame也可以让IE用上Chrome的引擎: -->
+		<meta name="renderer" content="webkit">
+		<!--国产浏览器高速模式-->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="穷在闹市" />
+		<!-- 作者 -->
+		<meta name="revised" content="穷在闹市.v3, 2019/05/01" />
+		<!-- 定义页面的最新版本 -->
+		<meta name="description" content="网站简介" />
+		<!-- 网站简介 -->
+		<meta name="keywords" content="搜索关键字，以半角英文逗号隔开" />
+		<title>穷在闹市出品</title>
+
+		<!-- 公共样式 开始 -->
+		<link rel="stylesheet" type="text/css" href="../../css/base.css">
+		<link rel="stylesheet" type="text/css" href="../../css/iconfont.css">
+		<script type="text/javascript" src="../../framework/jquery-1.11.3.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="../../layui/css/layui.css">
+		<script type="text/javascript" src="../../layui/layui.js"></script>
+		<!-- 滚动条插件 -->
+		<link rel="stylesheet" type="text/css" href="../../css/jquery.mCustomScrollbar.css">
+		<script src="../../framework/jquery-ui-1.10.4.min.js"></script>
+		<script src="../../framework/jquery.mousewheel.min.js"></script>
+		<script src="../../framework/jquery.mCustomScrollbar.min.js"></script>
+		<script src="../../framework/cframe.js"></script><!-- 仅供所有子页面使用 -->
+		<!-- 公共样式 结束 -->
+
+		<script>
+			function getIframUrl(id) {
+				let url = parent.document.getElementById(id).contentWindow.location.href;
+				return url;
+			}
+			var cateId = null;
+		</script>
+
+		<style>
+			.high{
+				height: 315px!important;
+			}
+		</style>
+
+		<script src="../../js/globalData.js"></script>
+
+		<script>
+
+			$(function () {
+				if (window.localStorage.getItem('flag')==="0"){console.log("6181981",window.localStorage.getItem('iframeCount'));
+					let url = getIframUrl("layui-layer-iframe"+window.localStorage.getItem('iframeCount'));
+					console.log(url);
+					let urlParmStr = url.slice(url.indexOf('?')+1);//获取问号后所有的字符串
+
+					let arr = urlParmStr.split('&');//通过&符号将字符串分割转成数组
+
+					let name = arr[0].split("=")[1];//获取数组中第一个参数
+
+					let description =arr[1].split("=")[1];//第二个参数
+
+					let parentId =arr[2].split("=")[1];//第二个参数
+
+					cateId =arr[3].split("=")[1];//第二个参数
+
+					name=decodeURI(name);//转码将解码方式unscape换为decodeURI，将中文参数获取
+					description=decodeURI(description);
+
+					if (description==="null") {
+						description = ""
+					}
+
+					$('#input_name').val(name)
+					$('#textarea_description').val(description)
+					console.log("初始化完成");}
+
+			})
+
+		</script>
+
+	</head>
+
+	<body>
+		<div class="cBody high">
+			<form id="modifyForm" class="layui-form" action="">
+
+				<div class="layui-form-item">
+					<label class="layui-form-label">类名</label>
+					<div class="layui-input-inline shortInput">
+						<input id="input_name" name="categoryName" placeholder="类名" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item layui-form-text">
+					<label class="layui-form-label">描述</label>
+					<div class="layui-input-block">
+						<textarea id="textarea_description" name="description" placeholder="请输入内容" class="layui-textarea"></textarea>
+					</div>
+				</div>
+				<!--<div class="layui-form-item">
+					<label class="layui-form-label">类级</label>
+					<div class="layui-input-block">
+						<input type="radio" name="sex" value="0" title="一级分类" checked>
+						<input type="radio" name="sex" value="1" title="二级分类">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">一级类名</label>
+					<div class="layui-input-inline shortInput">
+						<input id="input_firstCategoryName" type="text" name="firstCategoryName" required lay-verify="required" placeholder="一级类名" autocomplete="off" class="layui-input">
+					</div>
+				</div>-->
+
+				<div class="layui-form-item">
+					<div class="layui-input-block">
+						<button class="layui-btn" lay-submit lay-filter="submitBut">立即提交</button>
+					</div>
+				</div>
+
+			</form>
+
+			<!--todo: 表单提交监听-->
+			<script>
+				layui.use('form',function () {
+					let form = layui.form;
+					form.on('submit(submitBut)',function (data) {
+						window.localStorage.setItem('flag', "1");
+						console.log("data",data);
+						console.log(data.field.categoryName,data.field.description,cateId);
+						$.ajax({
+							url:'http://'+ip+':8080/mall/manager/modifyCategory',
+							type: 'POST',
+							contentType: 'application/json',
+							dataType: "json",
+							async: false,
+							data:JSON.stringify({
+								name:data.field.categoryName,
+								description:data.field.description,
+								cateId:cateId
+							}),
+							success: function (data) {
+								console.log("success.....");
+								if (data.code === "200") {
+									console.log("修改成功111");
+									$("#modifyForm")[0].reset();
+									var updateFrame = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+									parent.layer.close(updateFrame);  //再改变当前层的标题
+
+								} else {
+									console.log("修改失败");
+								}
+							},
+							error: function(){
+								console.log('出错啦!!');
+							},
+							headers:{token:'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlIjoxNjA2MTE4MTg5LCJ1c2VybmFtZSI6Im1hc3Rlcm1hIn0.z3aIPt3uoaiBJLyUDB_CuyxIMX7JiRvq2Xk61qqCOyY'}
+						})
+
+
+					})
+				})
+			</script>
+
+		</div>
+		<!--todo: 初始化商品信息修改表-->
+
+	</body>
+
+
+</html>

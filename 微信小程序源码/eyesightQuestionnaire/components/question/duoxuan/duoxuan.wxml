@@ -1,0 +1,19 @@
+<!--components/question/duoxuan/duoxuan.wxml-->
+
+<view class="duoxuanContainer questionWidth">
+  <view class="questionContent">
+    <view class="questionTitle">
+      <span class="star">{{question.isNecessary?"*":""}}</span>{{num}}、{{question.content}}<span class="tips">（多选题）</span>
+    </view>
+    <view class="duoxuanList">
+      <checkbox-group bindchange="checkboxChange" class="checkGroup">
+        <label wx:for="{{question.candidate}}" wx:key="id">
+          <view class="duoxuanLabel">
+            <checkbox value="{{item.id}}" data-type="1" name="{{item.questionId}}" checked="{{item.isSelected}}" disabled="{{isShow}}"/>
+            <view class="duoxuanItem">{{item.content}}</view>
+          </view>
+        </label>
+      </checkbox-group>
+    </view>
+  </view>
+</view>

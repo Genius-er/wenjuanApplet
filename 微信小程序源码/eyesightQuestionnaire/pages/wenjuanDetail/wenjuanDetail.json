@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "danxuan": "/components/question/danxuan/danxuan",
+    "duoxuan": "/components/question/duoxuan/duoxuan",
+    "tiankong": "/components/question/tiankong/tiankong"
+  }
+}

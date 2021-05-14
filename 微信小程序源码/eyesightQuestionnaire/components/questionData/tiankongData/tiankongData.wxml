@@ -1,0 +1,12 @@
+<!--components/questionData/tiankongData/tiankongData.wxml-->
+<view class="duoxuanContainer questionWidth">
+  <view class="questionContent">
+    <view class="questionTitle">
+      <span class="star">{{question.isNecessary?"*":""}}</span>{{num}}、{{question.content}}<span class="tips">（填空题）</span>
+    </view>
+    <!--来个查看填空题答案列表的按钮-->
+    <view class="padding margin">
+      <button class="cu-btn bg-grey lg" data-questionid="{{question.id}}" bindtap="showData">查看该题数据</button>
+    </view>
+  </view>
+</view>

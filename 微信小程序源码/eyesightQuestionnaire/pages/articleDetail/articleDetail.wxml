@@ -1,0 +1,36 @@
+<!--pages/articleDetail/articleDetail.wxml-->
+<import src="/templates/question/question.wxml"/>
+
+<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">阅读</view>
+</cu-custom>
+
+<view class="articleDetailContainer">
+  <!--文章主图-->
+  <view class="imgContainer">
+    <image class="coverImg" src="http://localhost:8080/wenjuan{{article.coverImg}}" mode="scaleToFill"></image>
+  </view>
+  <!--文章内容-->
+  <view class="articleContainer">
+    <!--文章头-->
+    <view class="articleHead">
+      <!--作者和发表时间-->
+      <view class="authorAndTime">
+        <view class="cu-avatar round" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big81005.jpg);"></view>
+        <text><text class="authorName">{{article.author}}</text> <text class="publishWord">发表于</text> <text class="publishTime">{{article.createTime}}</text></text>
+      </view>
+      <!--文章标题-->
+      <view class="articleTitle">
+        {{article.title}}
+      </view>
+    </view>
+    <!--分割线-->
+    <view class="divideLine"></view>
+    <!--文章正文-->
+    <view class="articleContent">
+      <text class="content">{{article.content}}</text>
+    </view>
+  </view>
+
+</view>

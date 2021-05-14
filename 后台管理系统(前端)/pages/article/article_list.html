@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+	<!-- Google Chrome Frame也可以让IE用上Chrome的引擎: -->
+	<meta name="renderer" content="webkit">
+	<!--国产浏览器高速模式-->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="穷在闹市" />
+	<!-- 作者 -->
+	<meta name="revised" content="穷在闹市.v3, 2019/05/01" />
+	<!-- 定义页面的最新版本 -->
+	<meta name="description" content="网站简介" />
+	<!-- 网站简介 -->
+	<meta name="keywords" content="搜索关键字，以半角英文逗号隔开" />
+	<title>穷在闹市出品</title>
+
+	<!-- 公共样式 开始 -->
+	<link rel="stylesheet" type="text/css" href="../../css/base.css">
+	<link rel="stylesheet" type="text/css" href="../../css/iconfont.css">
+	<script type="text/javascript" src="../../framework/jquery-1.11.3.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../../layui/css/layui.css">
+	<script type="text/javascript" src="../../layui/layui.js"></script>
+	<!-- 滚动条插件 -->
+	<link rel="stylesheet" type="text/css" href="../../css/jquery.mCustomScrollbar.css">
+	<script src="../../framework/jquery-ui-1.10.4.min.js"></script>
+	<script src="../../framework/jquery.mousewheel.min.js"></script>
+	<script src="../../framework/jquery.mCustomScrollbar.min.js"></script>
+	<script src="../../framework/cframe.js"></script><!-- 仅供所有子页面使用 -->
+	<!-- 公共样式 结束 -->
+
+	<style>
+		.layui-table img {
+			max-width: none;
+		}
+
+		/*.layui-input{
+      width: 100px;
+      height: 50px;
+    }*/
+		.layui-unselect
+		,.layui-form-select{
+			height: 28px;
+		}
+
+		.laytable-cell-1-0-11 {
+			width: 112px!important;
+		}
+
+	</style>
+
+	<script src="../../js/globalData.js"></script>
+
+</head>
+
+<body>
+<div class="cBody">
+	<!--			搜索模块-->
+	<div class="console">
+		<form class="layui-form" action="">
+			<div class="layui-form-item">
+				<div class="layui-input-inline">
+					<input type="text" name="search_article" required lay-verify="required" placeholder="输入文章标题（可模糊匹配）" autocomplete="off" class="layui-input">
+				</div>
+				<button class="layui-btn" lay-submit lay-filter="search_article">搜索</button>
+			</div>
+		</form>
+	</div>
+
+
+	<!--todo: 表格占位-->
+	<table id="article_table" class="layui-table" lay-filter="article_table"></table>
+	<div id="pagesize"></div>
+
+	<!--todo: deleye_category列表templet-->
+	<script type="text/html" id="isHot1" lay-filter="isHot1">
+		<select name="isHot" id="isHot" lay-filter="isHot">
+			{{#  if(d.isHot ===0){ }}
+			<option value="1">热门</option>
+			<option value="0" selected>非热门</option>
+			{{#  } else{ }}
+			<option value="1" selected>热门</option>
+			<option value="0">非热门</option>
+			{{#  } }}
+		</select>
+	</script>
+	<script type="text/html" id="status1" lay-filter="status1">
+		<select name="status" id="status" lay-filter="status">
+			{{#  if(d.status ===0){ }}
+			<option value="1">启用</option>
+			<option value="0" selected>未启用</option>
+			{{#  } else{ }}
+			<option value="1" selected>启用</option>
+			<option value="0">未启用</option>
+			{{#  } }}
+		</select>
+	</script>
+
+	<script type="text/html" id="options" lay-filter="options">
+		<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+	</script>
+
+	<!--todo: 渲染表格-->
+	<script>
+		layui.use(['table','form'],function () {
+			let table = layui.table;
+
+			//第一个实例
+			table.render({
+				elem: '#article_table'
+				,id:"reload"
+				,height: 550
+				// ,url: 'http://'+ip+':8080/wenjuan/manager/showAllProducts' //数据接口
+				,url: 'http://'+ip+':8080/wenjuan/manager/showAllArticle'
+				,headers:{token: window.localStorage.getItem("token")}
+				,contentType:'application/json'
+				,response: {
+					statusCode: 200 //规定成功的状态码，默认：0
+				}
+				,page: false//开启分页
+				/*, limits: [10, 15, 20]  //一页选择显示3,5或10条数据
+				, limit: 10 //一页显示6条数据
+				, parseData: function (res) { //将原始数据解析成 table 组件所规定的数据，res为从url中get到的数据
+					var result;
+					// console.log(this);
+					// console.log(JSON.stringify(res));
+					if (this.page.curr) {
+						result = res.data.slice(this.limit * (this.page.curr - 1), this.limit * this.page.curr);
+					}
+					else {
+						result = res.data.slice(0, this.limit);
+					}
+					return {
+						"code": res.code, //解析接口状态
+						"msg": res.msg, //解析提示文本
+						"count": res.count, //解析数据长度
+						"data": result //解析数据列表
+					};
+				}*/
+				,method: 'post'
+				,cols: [[
+					{field: 'id', title: 'ID', sort: true, fixed: 'left'}
+					,{field: 'title', title: '标题'}
+					,{field: 'author', title: '作者'}
+					,{field: 'coverImg', title: '封面图片'}
+					,{field: 'createTime', title: '创建时间'}
+					,{field: 'isHot', title: '是否热门',templet:'#isHot1',align:'center'}
+					,{field: 'status', title: '状态',templet:'#status1',align:'center'}
+					,{toolbar: '#options', title: '操作',align:'center'}
+				]],
+				done: function (res, curr, count) {
+					console.log(res.code);
+					//数据渲染完的回调。
+					//由于layui 设置了超出隐藏，所以这里改变下，以兼容操作按钮的下拉菜单
+					$("#options.layui-tbn").css({"height": "28px","line-height":"28px"});
+					$(".laytable-cell-1-0-5").css('overflow', 'visible');
+					$(".laytable-cell-1-0-6").css('overflow', 'visible');
+				}
+			});
+
+			/*todo:监听tool*/
+			table.on('tool(article_table)',function (obj) {
+				console.log("监听",obj.data);
+				switch (obj.event) {
+					case 'delete':
+						console.log("111");
+						$.ajax({
+							// url: 'http://'+ip+':8080/mall/manager/deleteProduct',
+							url: 'http://'+ip+':8080/wenjuan/manager/deleteArticle',
+							contentType:'application/json'
+							, data: JSON.stringify({id:obj.data.id})
+							,type: 'POST'
+							, success: function (data) {
+								console.log(data.code);
+								if (data.code === "200") {
+									obj.del();
+									layer.msg("删除成功");
+								} else {
+									layer.msg("删除失败");
+								}
+							}
+							,headers:{
+								token: window.localStorage.getItem("token")
+							}
+						})
+						break;//这是我的一个ajax删除方法了，记得删除后要有obj.del()哦，否则数据是不会更新的！
+				}
+			})
+
+			layui.use('form', function () {
+
+				var form = layui.form;
+				//监听下拉框编辑
+				form.on('select(status)', function (data) {
+					console.log(data);
+
+					//获取当前行tr对象
+					let elem = data.othis.parents('tr');
+					//第一列的值是Guid，取guid来判断
+					let id= elem.first().find('td').eq(0).text();
+					//选择的select对象值；
+					let selectValue = data.value;
+					console.log("新值",selectValue);
+
+					/*todo: 修改状态的ajax请求*/
+					$.ajax({
+						//url（对应servlet的路径）id
+						// url: 'http://'+ip+':8080/mall/manager/setProductStatus',
+						url: 'http://'+ip+':8080/wenjuan/manager/setArticleStatus',
+
+						contentType: 'application/json',
+						//参数
+						data: JSON.stringify({
+							id:id,
+							status:selectValue
+						}),
+						//请求类型
+						type: 'POST',
+						//响应体结果
+						// dataType: 'json',
+						//成功的回调
+						success: function(data){
+							//这里可以对响应体进行处理
+							console.log(data);
+							if (data.code==="200") {
+								console.log("修改成功");
+							}else {
+								console.log("修改失败");
+							}
+						},
+						//超时时间
+						timeout: 2000,
+						//失败的回调
+						error: function(){
+							console.log('出错啦!!');
+						},
+						//头信息
+						headers: {
+							token: window.localStorage.getItem("token")
+						}
+					})
+
+				})
+
+				form.on('select(isHot)', function (data) {
+					console.log(data);
+
+					//获取当前行tr对象
+					let elem = data.othis.parents('tr');
+					//第一列的值是Guid，取guid来判断
+					let id= elem.first().find('td').eq(0).text();
+					//选择的select对象值；
+					let selectValue = data.value;
+					console.log("新值",selectValue);
+
+					/*todo: 修改状态的ajax请求*/
+					$.ajax({
+						//url（对应servlet的路径）id
+						// url: 'http://'+ip+':8080/mall/manager/setProductStatus',
+						url: 'http://'+ip+':8080/wenjuan/manager/setArticleIsHot',
+
+						contentType: 'application/json',
+						//参数
+						data: JSON.stringify({
+							id:id,
+							isHot:selectValue
+						}),
+						//请求类型
+						type: 'POST',
+						//响应体结果
+						// dataType: 'json',
+						//成功的回调
+						success: function(data){
+							//这里可以对响应体进行处理
+							console.log(data);
+							if (data.code==="200") {
+								console.log("修改成功");
+							}else {
+								console.log("修改失败");
+							}
+						},
+						//超时时间
+						timeout: 2000,
+						//失败的回调
+						error: function(){
+							console.log('出错啦!!');
+						},
+						//头信息
+						headers: {
+							token: window.localStorage.getItem("token")
+						}
+					})
+
+				})
+			});
+
+			/*todo: 搜索监听*/
+			let form = layui.form;
+			//监听提交
+			form.on('submit(search_article)', function(data) {
+				// layer.msg(JSON.stringify(data.field));
+				let title = data.field.search_article;
+
+				/*todo: 处理搜索的ajax请求*/
+				table.reload('reload',{
+					height: 550
+					,where:{
+						title: title
+					}
+					// ,url: 'http://'+ip+':8080/mall/manager/searchProduct' //数据接口
+					,url: 'http://'+ip+':8080/wenjuan/manager/searchArticle' //数据接口
+					,headers:{
+						token: window.localStorage.getItem("token")
+					}
+					// ,request: JSON.stringify({"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlIjoxNjA2MTE4MTg5LCJ1c2VybmFtZSI6Im1hc3Rlcm1hIn0.z3aIPt3uoaiBJLyUDB_CuyxIMX7JiRvq2Xk61qqCOyY"})
+					,contentType:'application/json'
+					,response: {
+						statusCode: 200 //规定成功的状态码，默认：0
+					}
+					,page: {
+						limit:10
+					}
+					// true //开启分页
+					,method: 'post'
+					,cols: [[
+						{field: 'id', title: 'ID', sort: true, fixed: 'left'}
+						,{field: 'title', title: '标题'}
+						,{field: 'author', title: '作者'}
+						,{field: 'coverImg', title: '封面图片'}
+						,{field: 'createTime', title: '创建时间'}
+						,{field: 'isHot', title: '是否热门',templet:'#isHot1',align:'center'}
+						,{field: 'status', title: '状态',templet:'#status1',align:'center'}
+						,{toolbar: '#options', title: '操作',align:'center'}
+					]],
+					done: function (res, curr, count) {
+						console.log(res.code);
+						//数据渲染完的回调。
+						//由于layui 设置了超出隐藏，所以这里改变下，以兼容操作按钮的下拉菜单
+						$("#options.layui-tbn").css({"height": "28px","line-height":"28px"});
+						$(".laytable-cell-1-0-5").css('overflow', 'visible');
+						$(".laytable-cell-1-0-6").css('overflow', 'visible');
+					}
+				});
+				return false;
+			});
+		})
+
+
+
+
+
+	</script>
+</div>
+</body>
+
+</html>

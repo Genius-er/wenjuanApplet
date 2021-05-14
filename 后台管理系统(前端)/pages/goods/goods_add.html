@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+		<!-- Google Chrome Frame也可以让IE用上Chrome的引擎: -->
+		<meta name="renderer" content="webkit">
+		<!--国产浏览器高速模式-->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="穷在闹市" />
+		<!-- 作者 -->
+		<meta name="revised" content="穷在闹市.v3, 2019/05/01" />
+		<!-- 定义页面的最新版本 -->
+		<meta name="description" content="网站简介" />
+		<!-- 网站简介 -->
+		<meta name="keywords" content="搜索关键字，以半角英文逗号隔开" />
+		<title>穷在闹市出品</title>
+
+		<!-- 公共样式 开始 -->
+		<link rel="stylesheet" type="text/css" href="../../css/base.css">
+		<link rel="stylesheet" type="text/css" href="../../css/iconfont.css">
+		<script type="text/javascript" src="../../framework/jquery-1.11.3.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="../../layui/css/layui.css">
+		<script type="text/javascript" src="../../layui/layui.js"></script>
+		<!-- 滚动条插件 -->
+		<link rel="stylesheet" type="text/css" href="../../css/jquery.mCustomScrollbar.css">
+		<script src="../../framework/jquery-ui-1.10.4.min.js"></script>
+		<script src="../../framework/jquery.mousewheel.min.js"></script>
+		<script src="../../framework/jquery.mCustomScrollbar.min.js"></script>
+		<script src="../../framework/cframe.js"></script><!-- 仅供所有子页面使用 -->
+		<!-- 公共样式 结束 -->
+
+		<script src="../../js/globalData.js"></script>
+
+		<style>
+			.layui-form-label{
+				width: 100px;
+			}
+			.layui-input-block{
+				margin-left: 130px;
+			}
+			.layui-form{
+				margin-right: 30%;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div class="cBody">
+			<form id="addForm" class="layui-form" action="">
+
+				<div class="layui-form-item">
+					<label class="layui-form-label">商品名称</label>
+					<div class="layui-input-block">
+						<input type="text" name="name" required lay-verify="required" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+
+				<div class="layui-form-item">
+					<label class="layui-form-label">商品图片</label>
+					<div class="layui-upload-drag layui-input-block" id="goodsPic">
+						<input id="input_img" type="hidden" name="img" required class="layui-input">
+						<div class="hint">
+							<i class="layui-icon"></i>
+							<p>点击上传，或将文件拖拽到此处</p>
+						</div>
+
+						<div class="layui-hide" id="uploadDemoView">
+							<img src="" alt="上传成功后渲染" style="max-width: 196px">
+						</div>
+					</div>
+				</div>
+
+				<div class="layui-form-item">
+					<label class="layui-form-label">参考单价</label>
+					<div class="layui-input-block">
+						<input type="text" name="price" required lay-verify="required|number" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">初始库存</label>
+					<div class="layui-input-block">
+						<input type="text" name="stock" required lay-verify="required|number" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+
+
+				<div class="layui-form-item">
+					<label class="layui-form-label">详情</label>
+					<div class="layui-input-block">
+						<textarea name="detail" class="layui-textarea"></textarea>
+					</div>
+				</div>
+
+				<div class="layui-form-item">
+					<label class="layui-form-label">是否上架商品</label>
+					<div class="layui-input-block">
+						<input type="radio" name="status" value="1" title="是" checked>
+						<input type="radio" name="status" value="0" title="否">
+					</div>
+				</div>
+
+				<div class="layui-form-item">
+					<label class="layui-form-label">分类</label>
+						<div class="layui-input-block">
+							<input type="text" name="firstCategory" required placeholder="分类名" autocomplete="off" class="layui-input">
+						</div>
+				</div>
+
+				<div class="layui-form-item">
+					<div class="layui-input-block">
+						<button class="layui-btn" lay-submit lay-filter="submitBut">立即提交</button>
+					</div>
+				</div>
+			</form>
+
+
+			<script>
+				layui.use(['upload','form'], function() {
+					var form = layui.form;
+					var upload = layui.upload;
+					var layer = layui.layer;
+
+					//监听提交
+					form.on('submit(submitBut)', function(data) {
+						console.log(data);
+						$.ajax({
+							url: 'http://'+ip+':8080/mall/manager/addProduct',
+							contentType:'application/json'
+							, data: JSON.stringify({
+								name:data.field.name,
+								mainImage:data.field.img,
+								price:data.field.price,
+								stock:data.field.stock,
+								detail:data.field.detail,
+								status:data.field.status,
+								cateName:data.field.firstCategory,
+							})
+							,type: 'POST'
+							, success: function (data) {
+								console.log(data.code);
+								if (data.code === "200") {
+
+									layer.msg("添加成功");
+									$("#addForm")[0].reset();
+								} else {
+									layer.msg("添加失败失败");
+								}
+							}
+							,headers:{
+								token:'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlIjoxNjA2MTE4MTg5LCJ1c2VybmFtZSI6Im1hc3Rlcm1hIn0.z3aIPt3uoaiBJLyUDB_CuyxIMX7JiRvq2Xk61qqCOyY'
+							}
+						})
+						return false;
+					});
+					/*form.verify({
+						//数组的两个值分别代表：[正则匹配、匹配不符时的提示文字]
+					  	ZHCheck: [
+						    /^[\u0391-\uFFE5]+$/
+						    ,'只允许输入中文'
+					  	]
+					});*/
+
+					//拖拽上传
+					upload.render({
+						elem: '#goodsPic'
+						// ,url: 'https://httpbin.org/post' //改成您自己的上传接口
+						,url: 'http://'+ip+':8080/mall/manager/uploadImage'
+						,method:'post'
+						,headers:{token:'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRlIjoxNjA2MTE4MTg5LCJ1c2VybmFtZSI6Im1hc3Rlcm1hIn0.z3aIPt3uoaiBJLyUDB_CuyxIMX7JiRvq2Xk61qqCOyY'}
+						,contentType:'multipart/form-data'
+						,response: {
+							statusCode: 200 //规定成功的状态码，默认：0
+						}
+						,done: function(res){
+							console.log(res)
+							layer.msg('上传成功');
+							layui.$('#uploadDemoView').removeClass('layui-hide').find('img').attr('src', 'http://'+ip+':8080/mall/'+res.data.mainImage);
+							layui.$(".hint").remove();
+							layui.$("#input_img").val(res.data.mainImage)
+						}
+					});
+
+
+				});
+			</script>
+
+		</div>
+	</body>
+
+</html>

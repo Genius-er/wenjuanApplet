@@ -1,0 +1,30 @@
+<!--components/questionData/danxuanData/danxuanData.wxml-->
+<view class="danxuanContainer questionWidth">
+  <view class="questionContent">
+    <view class="questionTitle">
+      <span class="star">{{question.isNecessary?"*":""}}</span>{{num}}、{{question.content}}<span class="tips">（单选题）</span>
+    </view>
+
+    <view class="danxuanList">
+      <radio-group bindchange="radioChange" class="checkGroup">
+        <label wx:for="{{question.candidate}}" wx:key="id">
+          <view class="danxuanLabel">
+            <radio value="{{item.id}}" data-type="0" name="{{'questionId'+item.questionId}}" disabled="{{isShow}}"/>
+            <view class="danxuanItem">{{index+1}}、{{item.content}}</view>
+          </view>
+        </label>
+      </radio-group>
+    </view>
+
+    <view class="wx-canvas">
+      <!--放扇形图-->
+      <ec-canvas
+          id="xuanzePie"
+          canvas-id="mychart-pie"
+          ec="{{ ec }}"
+          class="myChart"
+          wx:if="{{!canvasImg}}"></ec-canvas>
+      <image wx:else src="{{canvasImg}}" class="canvasImg"/>
+    </view>
+  </view>
+</view>

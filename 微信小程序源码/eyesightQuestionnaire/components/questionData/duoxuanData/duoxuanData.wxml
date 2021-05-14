@@ -1,0 +1,30 @@
+<!--components/questionData/duoxuanData/duoxuanData.wxml-->
+<view class="xuanzeContainer questionWidth">
+  <view class="questionContent">
+    <view class="questionTitle">
+      <span class="star">{{question.isNecessary?"*":""}}</span>{{num}}、{{question.content}}<span class="tips">（多选题）</span>
+    </view>
+
+    <view class="duoxuanList">
+      <checkbox-group bindchange="checkboxChange" class="checkGroup">
+        <label wx:for="{{question.candidate}}" wx:key="id">
+          <view class="duoxuanLabel">
+            <checkbox value="{{item.id}}" data-type="1" name="{{item.questionId}}" disabled="{{isShow}}"/>
+            <view class="duoxuanItem">{{index+1}}、{{item.content}}</view>
+          </view>
+        </label>
+      </checkbox-group>
+    </view>
+
+    <view class="wx-canvas">
+      <!--放扇形图-->
+      <ec-canvas
+          id="xuanzePie"
+          class="myChart"
+          canvas-id="mychart-pie"
+          ec="{{ ec }}"
+          wx:if="{{!canvasImg}}"></ec-canvas>
+      <image wx:else src="{{canvasImg}}" class="canvasImg"/>
+    </view>
+  </view>
+</view>

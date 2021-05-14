@@ -1,0 +1,32 @@
+<!--pages/templates/votelist/votelist.wxml-->
+<template name='wenjuan_list'>
+  <view data-url='/pages{{isAnswered===false?"/wenjuanDetail/wenjuanDetail":"/wenjuanShowAnswer/wenjuanShowAnswer"}}?id={{id}}' data-index='{{index}}' bindtap='nophonefull' bindlongtap="copy"  bindtouchstart="touchStart" bindtouchend="touchEnd"  class='singlBox'>
+
+    <view class='imageBox'>
+      <image src="{{host}}{{coverImg}}" mode="aspectFill"></image>
+    </view>
+
+    <view class='jobMesBox'>
+      <view class='name'>{{title}}</view>
+
+      <view class='schedule' wx:if="{{isAnswered===false}}">
+        <view><text class='weizuoda'>◉</text>未作答</view>
+        <view><text class='time'>{{createTime}}</text></view>
+      </view>
+<!--      <view class='schedule' wx:elif="{{!wenjuanIsAnswerList.indexof(id)===-1}}">
+        <view><text class='jinxingzhong'>◉</text>已做答</view>
+        <view><text class='time'>{{createTimeStr}}</text></view>
+      </view>
+      <view class='schedule' wx:elif="{{schedule == 'zanting'}}">
+        <view><text class='zanting'>◉</text>暂停</view>
+        <view><text class='time'>{{createTimeStr}}</text></view>
+      </view>-->
+      <view class='schedule' wx:else>
+        <view><text class='yizuoda' >◉</text>已作答</view>
+        <view><text class='time'>{{createTime}}</text></view>
+      </view>
+
+    </view>
+  </view>
+
+</template>

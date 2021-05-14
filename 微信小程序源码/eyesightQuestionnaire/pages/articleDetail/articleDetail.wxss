@@ -1,0 +1,48 @@
+/* pages/articleDetail/articleDetail.wxss */
+/*封面图片区域*/
+.coverImg {
+  height: 310rpx;
+  width: 100%;
+}
+
+/*文章内容*/
+.articleContainer {
+  padding: 25rpx;
+}
+
+/*文章头*/
+.authorName {
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+}
+
+.publishWord {
+  font-size: 22rpx;
+
+}
+
+.publishTime {
+  margin-left: 20rpx;
+  font-size: 20rpx;
+}
+
+/*文章标题*/
+.articleTitle {
+  padding: 0 10rpx;
+  margin-top: 30rpx;
+  font-weight: bold;
+  font-size: 35rpx;
+}
+
+/*分割线*/
+.divideLine {
+  margin: 40rpx 10rpx;
+  height: 1rpx;
+  background: #aaa;
+}
+
+
+
+
+
+

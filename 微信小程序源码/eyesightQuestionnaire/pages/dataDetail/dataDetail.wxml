@@ -1,0 +1,30 @@
+
+<!--pages/dataDetail/dataDetail.wxml-->
+<view class="dataDetailContainer">
+  <cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+    <view slot="backText">返回</view>
+    <view slot="content">数据细节</view>
+  </cu-custom>
+
+
+
+  <scroll-view
+      class="questionList"
+      scroll-y
+      enhanced
+      show-scrollbar
+  >
+
+    <view class="questionItem" wx:for="{{questionList}}" wx:key="id">
+      <!--用微信小程序的自定义表单组件的内置behaviors，将自定表单组件中的数据能在外部submit中得到-->
+      <!--单选-->
+      <!--name=qiestionId/{{item.id}}/{{item.isNecessary}}/{{item.type===0}}-->
+      <danxuanData wx:if="{{item.type===0}}" question="{{item}}" num="{{index+1}}"></danxuanData>
+      <!--多选-->
+      <duoxuanData wx:if="{{item.type===1}}" question="{{item}}" num="{{index+1}}"></duoxuanData>
+      <!--填空-->
+      <tiankongData wx:if="{{item.type===2}}" question="{{item}}" num="{{index+1}}"></tiankongData>
+    </view>
+
+  </scroll-view>
+</view>

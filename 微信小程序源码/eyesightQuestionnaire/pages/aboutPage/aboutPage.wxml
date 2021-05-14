@@ -1,0 +1,15 @@
+<!--pages/aboutPage/aboutPage.wxml-->
+<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">关于</view>
+</cu-custom>
+
+<!--关于文字-->
+<view class="aboutContainer">
+  <view class="aboutTitle">关于青少年视力的简介</view>
+  <view class="aboutContent">儿童青少年是祖国的未来和民族的希望。近年来，由于中小学生课内外负担加重，手机、电脑等带电子屏幕产品（以下简称电
+    子产品）的普及，用眼过度、用眼不卫生、缺乏体育锻炼和户外活动等因素，我国儿童青少年近视率居高不下、不断攀升，近视低
+    龄化、重度化日益严重，已成为一个关系国家和民族未来的大问题。防控儿童青少年近视需要政府、学校、医疗卫生机构、家庭、
+    学生等各方面共同努力，需要全社会行动起来，共同呵护好孩子的眼睛。</view>
+</view>
+

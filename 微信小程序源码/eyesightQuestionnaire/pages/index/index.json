@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "article": "/components/article/article",
+    "wenjuan": "/components/wenjuan/wenjuan",
+    "data": "/components/data/data",
+    "user": "/components/user/user"
+  }
+}

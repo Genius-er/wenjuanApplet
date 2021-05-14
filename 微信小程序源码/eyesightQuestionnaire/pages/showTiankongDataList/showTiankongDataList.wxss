@@ -1,0 +1,9 @@
+/* pages/showTiankongDataList/showTiankongDataList.wxss */
+
+.solid-border-around {
+  border: 1rpx solid black;
+}
+
+.solid-border-right {
+  border-right: 1rpx solid black;
+}

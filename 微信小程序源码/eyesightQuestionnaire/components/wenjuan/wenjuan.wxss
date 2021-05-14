@@ -1,0 +1,6 @@
+/* components/wenjuan/wenjuan.wxss */
+@import "/templates/wenjuanList/wenjuanList.wxss";
+
+.scrollWenjuan {
+  height: calc(100vh - 220rpx);
+}

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="4cd68688-4afa-4516-a7bb-eb315412d54e" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectId" id="1njUTtM1YfgleEZYYPQUXal67FY" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates/dataList" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.import" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\大学四年\大四\毕业设计\6.开发\微信小程序源码\eyesightQuestionnaire\templates\dataList" />
+      <recent name="D:\大学四年\大四\毕业设计\6.开发\微信小程序源码\eyesightQuestionnaire\utils" />
+      <recent name="D:\大学四年\大四\毕业设计\6.开发\微信小程序源码\eyesightQuestionnaire\ec-canvas" />
+      <recent name="D:\大学四年\大四\毕业设计\6.开发\微信小程序源码\eyesightQuestionnaire" />
+      <recent name="D:\大学四年\大四\毕业设计\6.开发\微信小程序源码\eyesightQuestionnaire\static\images\wj" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\大学四年\大四\毕业设计\6.开发\微信小程序源码\eyesightQuestionnaire\images\tabbar" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4cd68688-4afa-4516-a7bb-eb315412d54e" name="Default Changelist" comment="" />
+      <created>1611903004597</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1611903004597</updated>
+      <workItem from="1611903005753" duration="5468000" />
+      <workItem from="1612092342425" duration="9007000" />
+      <workItem from="1612240199741" duration="34410000" />
+      <workItem from="1613621375836" duration="6297000" />
+      <workItem from="1613720399930" duration="877000" />
+      <workItem from="1613902312205" duration="1987000" />
+      <workItem from="1614421382516" duration="29739000" />
+      <workItem from="1615016306509" duration="29394000" />
+      <workItem from="1615268847628" duration="33606000" />
+      <workItem from="1615529210130" duration="10223000" />
+      <workItem from="1615612136816" duration="233000" />
+      <workItem from="1615615684607" duration="32382000" />
+      <workItem from="1616030179917" duration="16073000" />
+      <workItem from="1616207846256" duration="5764000" />
+      <workItem from="1616664044647" duration="12581000" />
+      <workItem from="1616919669139" duration="833000" />
+      <workItem from="1617345573614" duration="12775000" />
+      <workItem from="1617431134327" duration="3617000" />
+      <workItem from="1619105431729" duration="1285000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
